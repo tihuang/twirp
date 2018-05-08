@@ -1009,7 +1009,7 @@ func (t *twirp) generateServerJSONMethod(service *descriptor.ServiceDescriptorPr
 	t.P(`  ctx = callResponsePrepared(ctx, s.hooks)`)
 	t.P()
 	t.P(`  var buf `, t.pkgs["bytes"], `.Buffer`)
-	t.P(`  marshaler := &`, t.pkgs["jsonpb"], `.Marshaler{OrigName: true}`)
+	t.P(`  marshaler := &`, t.pkgs["jsonpb"], `.Marshaler{OrigName: true, EmitDefaults: true}`)
 	t.P(`  if err = marshaler.Marshal(&buf, respContent); err != nil {`)
 	t.P(`    err = wrapErr(err, "failed to marshal json response")`)
 	t.P(`    s.writeError(ctx, resp, `, t.pkgs["twirp"], `.InternalErrorWith(err))`)
